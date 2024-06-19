@@ -63,11 +63,26 @@ body {
 `python hsl2hex.py ./sample.css --print-lines -o ~/output.css`
 
 *Sample Output*
-```
+```css
 background-color:  #6598cc;
 color:  #ff0000;
 border-color:  #1fdf1f;
 background-color:  #0000ff;
 --custom-color:  #7f007f;
 --another-color:  #feff00;
+```
+
+*Alternate Sample Usage*
+
+If instead, no --print-lines argument is passed, the sample output is simply:
+
+*Alternate Sample Output*
+
+```
+#6598cc
+#ff0000
+#1fdf1f
+#0000ff
+#7f007f
+#feff00
 ```
