@@ -1,11 +1,32 @@
 import colorsys
 import re
 
-def hsl_to_hex(h, s, l):
-    r, g, b = colorsys.hls_to_rgb(h/360, 1/100, s/100)
-    return f"#{int(r*255):02x}{int(g*255):02x}{int(b*255):02x}"
+# Set this to True if you want to print variable names along with hex codes
+PRINT_NAMES = True
 
-css_colours = """
+def hsl_to_hex(h, s, l):
+    r, g, b = colorsys.hls_to_rgb(h / 360, l / 100, s / 100)
+    return f"#{int(r * 255):02x}{int(g * 255):02x}{int(b * 255):02x}"
+
+def convert_css_hsl_to_hex(css, print_names):
+    hsl_pattern = re.compile(r'(--[\w-]+: )?hsl\((\d+), (\d+)%, (\d+)%\);')
+    
+    hex_codes = []
+    
+    for match in hsl_pattern.finditer(css):
+        h = int(match.group(2))
+        s = int(match.group(3))
+        l = int(match.group(4))
+        hex_code = hsl_to_hex(h, s, l)
+        
+        if print_names:
+            hex_codes.append(f"{match.group(1)} {hex_code};")
+        else:
+            hex_codes.append(hex_code)
+    
+    return hex_codes
+
+css_hsl_colors = """
 :root { 
     --red-0: hsl(0, 69%, 76%);
     --red-1: hsl(0, 71%, 67%);
@@ -111,16 +132,14 @@ css_colours = """
     --grey-5: hsl(0, 0%, 31%);
     --grey-6: hsl(0, 0%, 22%);
     --grey-7: hsl(0, 0%, 13%); }
-"""
+    """
 
-def css_hsl_to_hex(css):
-    hsl_pattern = re.compile(r'(hsl\((\d+), (\d+)%, (\d+)%\))')
-    def replace_hsl(match):
-        h = int(match.group(2))
-        s = int(match.group(3))
-        l = int(match.group(4))
-        return hsl_to_hex(h, s, l)
-    return hsl_pattern.sub(lambda m: replace_hsl(m), css)
+# Replace the above string with your actual CSS HSL colors string
+# css_hsl_colors = ...
 
-converted_css = convert_css_hsl_to_hex(css_colours)
-print(converted_css)
+# Convert HSL to HEX
+hex_codes = convert_css_hsl_to_hex(css_hsl_colors, PRINT_NAMES)
+
+# Print the results
+for code in hex_codes:
+    print(code)
