@@ -29,33 +29,7 @@ def convert_css_hsl_to_hex(css, print_names):
     return hex_codes
 
 css_hsl_colors = """
-/* Sample CSS file with HSL colors */
-body {
-    background-color: hsl(210, 50%, 60%);
-}
-
-.header {
-    color: hsl(0, 100%, 50%);
-    border-color: hsl(120, 75%, 50%);
-}
-
-.footer {
-    background-color: hsl(240, 100%, 50%);
-}
-
---custom-color: hsl(300, 100%, 25%);
---another-color: hsl(60, 100%, 50%);
     """
-
-# Replace the above string with your actual CSS HSL colors string
-# css_hsl_colors = ...
-
-# Convert HSL to HEX
-hex_codes = convert_css_hsl_to_hex(css_hsl_colors, PRINT_NAMES)
-
-# Print the results
-for code in hex_codes:
-    print(code)
 
 def main():
     parser = argparse.ArgumentParser(description="Convert HSL colors in CSS to HEX format.")
