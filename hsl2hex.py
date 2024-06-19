@@ -11,7 +11,7 @@ def hsl_to_hex(h, s, l):
     return f"#{int(r * 255):02x}{int(g * 255):02x}{int(b * 255):02x}"
 
 def convert_css_hsl_to_hex(css, print_names):
-    hsl_pattern = re.compile(r'(--[\w-]+: )?hsl\((\d+), (\d+)%, (\d+)%\);')
+    hsl_pattern = re.compile(r'([\w-]+.* )?hsl\((\d+), (\d+)%, (\d+)%\);')
     
     hex_codes = []
     
